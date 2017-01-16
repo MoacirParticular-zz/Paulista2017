@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Artilharia" representedClassName="Artilharia" syncable="YES">
+        <attribute name="codigo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="codigoJogador" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="nomeEscudo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nomeJogador" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numeroGols" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="posicao" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="posicaoArray" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Classificacao" representedClassName="Classificacao" syncable="YES">
+        <attribute name="codigo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="derrotas" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dsgrupo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="empates" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="jogos" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="nrGolsContra" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="nrGolsMarcados" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="nrVitorias" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="pontosGanhos" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="posicao" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="saldoGols" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="clube" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Clube" inverseName="classificaoPiratini" inverseEntity="Clube" syncable="YES"/>
+    </entity>
+    <entity name="Clube" representedClassName="Clube" syncable="YES">
+        <attribute name="codigo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="escudo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grupo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sigla" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="classificaoPiratini" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Classificacao" inverseName="clube" inverseEntity="Classificacao" syncable="YES"/>
+        <relationship name="jogos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Jogo" inverseName="mandante" inverseEntity="Jogo" syncable="YES"/>
+    </entity>
+    <entity name="Farroupilha" representedClassName="Farroupilha" parentEntity="Classificacao" syncable="YES"/>
+    <entity name="Geral" representedClassName="Geral" parentEntity="Classificacao" syncable="YES"/>
+    <entity name="Jogo" representedClassName="Jogo" syncable="YES">
+        <attribute name="codigo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="golsMandante" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="golsVisitante" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="mandante" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Clube" inverseName="jogos" inverseEntity="Clube" syncable="YES"/>
+        <relationship name="rodada" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Rodada" inverseName="jogos" inverseEntity="Rodada" syncable="YES"/>
+        <relationship name="turno" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Turno" inverseName="jogos" inverseEntity="Turno" syncable="YES"/>
+        <relationship name="visitante" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Clube" inverseName="jogos" inverseEntity="Clube" syncable="YES"/>
+    </entity>
+    <entity name="Piratini" representedClassName="Piratini" parentEntity="Classificacao" syncable="YES"/>
+    <entity name="Rodada" representedClassName="Rodada" syncable="YES">
+        <attribute name="codigo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dataFim" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dataInicio" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="estagio" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tipo" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="jogos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Jogo" inverseName="rodada" inverseEntity="Jogo" syncable="YES"/>
+        <relationship name="turno" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Turno" inverseName="rodadas" inverseEntity="Turno" syncable="YES"/>
+    </entity>
+    <entity name="Turno" representedClassName="Turno" syncable="YES">
+        <attribute name="codigo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="jogos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Jogo" inverseName="turno" inverseEntity="Jogo" syncable="YES"/>
+        <relationship name="rodadas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rodada" inverseName="turno" inverseEntity="Rodada" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Artilharia" positionX="-6005" positionY="-1782" width="128" height="148"/>
+        <element name="Classificacao" positionX="-6183" positionY="-1782" width="128" height="223"/>
+        <element name="Clube" positionX="-5951" positionY="-1557" width="128" height="148"/>
+        <element name="Farroupilha" positionX="-6291" positionY="-1494" width="128" height="43"/>
+        <element name="Geral" positionX="-6471" positionY="-1494" width="128" height="43"/>
+        <element name="Jogo" positionX="-5753" positionY="-1513" width="128" height="163"/>
+        <element name="Piratini" positionX="-6147" positionY="-1494" width="128" height="43"/>
+        <element name="Rodada" positionX="-5753" positionY="-1755" width="128" height="163"/>
+        <element name="Turno" positionX="-5526" positionY="-1597" width="128" height="103"/>
+    </elements>
+</model>
